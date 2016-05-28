@@ -20,7 +20,8 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote' ] },
 		{ name: 'links', items: [ 'Link', 'Unlink' ] },
 		{ name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley' ] },
-		{ name: 'last', items: [ 'RemoveFormat', 'Maximize' ] }
+		{ name: 'last', items: [ 'RemoveFormat', 'Maximize' ] },
+		{ name: 'image_editor', items: [ 'copyimage' ] }
 	];
 
 	// Set the most common block elements
@@ -35,5 +36,9 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Prevent blank paragraphs
 	config.fillEmptyBlocks = false;
+	
+	config.allowedContent = true;
+
+	config.extraPlugins = 'copyimage';
 
 };
