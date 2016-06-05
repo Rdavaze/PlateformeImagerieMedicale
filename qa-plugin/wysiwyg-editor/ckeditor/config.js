@@ -21,7 +21,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'links', items: [ 'Link', 'Unlink' ] },
 		{ name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley' ] },
 		{ name: 'last', items: [ 'RemoveFormat', 'Maximize' ] },
-		{ name: 'image_editor', items: [ 'copyimage' ] }
+		{ name: 'image_editor', items: [ 'copyimage', 'drawellipse', 'drawpolygon' ] }
 	];
 
 	// Set the most common block elements
@@ -39,6 +39,10 @@ CKEDITOR.editorConfig = function( config ) {
 	
 	config.allowedContent = true;
 
-	config.extraPlugins = 'copyimage';
+	config.extraPlugins = 'copyimage,drawellipse,drawpolygon';
+	
+	//config.protectedSource.push(/[\r|\n]|(<a([^*>]+>)|<\/a>)/g);
+
+
 
 };

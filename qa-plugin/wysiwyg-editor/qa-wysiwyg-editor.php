@@ -223,7 +223,7 @@ class qa_wysiwyg_editor
 
 			// remove <p>, <br>, etc... since those are OK in text
 			$htmlformatting = preg_replace('/<\s*\/?\s*(br|p)\s*\/?\s*>/i', '', $html);
-
+			//$htmlformatting = $html;
 			if (preg_match('/<.+>/', $htmlformatting)) {
 				// if still some other tags, it's worth keeping in HTML
 				// qa_sanitize_html() is ESSENTIAL for security
