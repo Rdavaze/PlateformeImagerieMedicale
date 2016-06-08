@@ -14,8 +14,10 @@ CKEDITOR.plugins.add('drawellipse', {
 
 		var	    w = canvas.width,
 			    h = canvas.height,
-			    x1,                 
+			    x1,
+			    x2,
 			    y1,
+			    y2,
 			    isDown = false;     
 
 		   
@@ -25,22 +27,25 @@ CKEDITOR.plugins.add('drawellipse', {
 			    x1 = e.clientX - rect.left;
 			    y1 = e.clientY - rect.top;
 			    isDown = true;
+			    
 			}
 
 			canvas.$.onmouseup = function() {
 			    isDown = false;
+			    updateAnnotation(x1,y1,x2,y2);
 			}
 
 			canvas.$.onmousemove = function(e) {
 
 			    if (!isDown) return;
 
-			    var rect = canvas.$.getBoundingClientRect(),
-			        x2 = e.clientX - rect.left,
+			    var rect = canvas.$.getBoundingClientRect();
+			        x2 = e.clientX - rect.left;
 			        y2 = e.clientY - rect.top;
 
 			    ctx.clearRect(0, 0, w, h);
 			    ctx.drawImage(base_image, 0, 0, imageWidth, imageHeight);
+			    drawExistingEllipse();
 			    drawEllipse(x1, y1, x2, y2);
 			}
 		
@@ -80,4 +85,42 @@ function drawEllipse(x1, y1, x2, y2) {
     ctx.closePath();
     ctx.strokeStyle = '#00F';
     ctx.stroke();
+}
+
+function updateAnnotation(x1,y1,x2,y2){
+
+	$.ajax({
+		url: 'qa-plugin/wysiwyg-editor/ckeditor/plugins/drawellipse/saveAnnotations.php',
+		type: 'POST',
+		dataType: 'text',
+		data: {'x1':x1,'y1':y1,'x2':x2,'y2':y2}
+	});
+	
+}
+
+function drawExistingEllipse(){
+	
+	$.get('qa-plugin/wysiwyg-editor/ckeditor/plugins/drawellipse/getAnnotations.php',function(data){
+		for(var i=0; i < data.length; i++){
+			drawEllipse(data[i].x1,data[i].y1,data[i].x2,data[i].y2);
+		}
+	})
+	  .fail(function() {
+		    alert( "error" );
+		  });
+
+//	var xhr = new XMLHttpRequest();
+//	// Lorsqu'un réponse est émise par le serveur
+//	xhr.onreadystatechange = function() {
+//		if (xhr.status == 200 && xhr.readyState == 4) {
+//
+//			// xhr.responseText contient exactement ce que la page PHP renvoi
+//			var answer = JSON.parse(xhr.responseText);
+//			console.log(answer);
+//
+//		}
+//		
+//		xhr.open('GET', 'qa-plugin/wysiwyg-editor/ckeditor/plugins/drawellipse/getAnnotations.php');
+//		xhr.send('');
+//}
 }
