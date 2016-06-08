@@ -78,6 +78,6 @@ function drawEllipse(x1, y1, x2, y2) {
 
     
     ctx.closePath();
-    ctx.strokeStyle = '#000';
+    ctx.strokeStyle = '#00F';
     ctx.stroke();
 }
