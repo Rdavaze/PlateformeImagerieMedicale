@@ -13,7 +13,7 @@ CKEDITOR.plugins.add('drawpolygon', {
 
 
 		editor.ui.addButton('drawpolygon', {
-			label   : 'Draw Polygon',
+			label   : 'Dessiner polygone',
 			command : 'drawpolygonCommand',
 			toolbar : 'drawpolygon'
 		});

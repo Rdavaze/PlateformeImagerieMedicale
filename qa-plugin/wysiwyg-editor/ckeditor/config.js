@@ -16,12 +16,13 @@ CKEDITOR.editorConfig = function( config ) {
 	                  { name: 'align', items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
 	                  { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
 	                  { name: 'font', items: [ 'Font', 'FontSize', 'Format' ] },
+	                  { name: 'cancel', items: [ 'cancelellipse']},
 	                  '/',
 	                  { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote' ] },
 	                  { name: 'links', items: [ 'Link', 'Unlink' ] },
 	                  { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley' ] },
 	                  { name: 'last', items: [ 'RemoveFormat', 'Maximize' ] },
-	                  { name: 'image_editor', items: [ 'copyimage', 'drawellipse', 'drawpolygon' ] }
+	                  { name: 'image_editor', items: [ 'copyimage', 'drawellipse', 'drawpolygon','strinsert' ] }
 	                  ];
 
 
@@ -37,5 +38,5 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.allowedContent = true;
 
-	config.extraPlugins = 'copyimage,drawellipse,drawpolygon';
+	config.extraPlugins = 'copyimage,drawellipse,drawpolygon,richcombo,strinsert,cancelellipse';
 };

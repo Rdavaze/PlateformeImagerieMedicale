@@ -7,7 +7,7 @@ CKEDITOR.plugins.add('drawellipse', {
 
 
 		editor.ui.addButton('drawellipse', {
-			label   : 'Draw Ellipse',
+			label   : 'Dessiner ellipse',
 			command : 'drawellipseCommand',
 			toolbar : 'drawellipse'
 		});
@@ -89,17 +89,15 @@ function drawEllipse(x1, y1, x2, y2) {
 
 
 	ctx.closePath();
-	ctx.strokeStyle = '#00F';
 	ctx.stroke();
 }
 
 function updateAnnotation(x1,y1,x2,y2){
-
 	$.ajax({
 		url: 'qa-plugin/wysiwyg-editor/ckeditor/plugins/drawellipse/saveAnnotations.php',
 		type: 'POST',
 		dataType: 'text',
-		data: {'x1':x1,'y1':y1,'x2':x2,'y2':y2,'postid':postid}
+		data: {'x1':x1,'y1':y1,'x2':x2,'y2':y2,'postid':postid,'color':ctx.strokeStyle}
 	});
 
 }
@@ -109,11 +107,14 @@ function drawExistingEllipse(){
 	$.get('qa-plugin/wysiwyg-editor/ckeditor/plugins/drawellipse/getAnnotations.php?postid='+postid,function(data){
 
 		data = JSON.parse(data);		
-
+		var currentStrokeStyle = ctx.strokeStyle;
+		
 		for(var key in data){
+			ctx.strokeStyle = data[key].color;
 			drawEllipse(parseInt(data[key].x1),parseInt(data[key].y1),parseInt(data[key].x2),parseInt(data[key].y2));
 		}
 
+		ctx.strokeStyle = currentStrokeStyle;
 	})
 	.fail(function() {
 		alert( "error" );

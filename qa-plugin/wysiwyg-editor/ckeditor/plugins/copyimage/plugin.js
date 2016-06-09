@@ -15,7 +15,7 @@ CKEDITOR.plugins.add('copyimage', {
 
 	// ajout du bouton dans la toolbar
 	editor.ui.addButton('copyimage', {
-		label   : 'Copy Image',
+		label   : 'Copie image',
 		command : 'copyimageCommand',
 		toolbar : 'copyimage'
 	});
@@ -43,6 +43,7 @@ CKEDITOR.plugins.add('copyimage', {
 			element.append(canvas);
 			
 			ctx = canvas.$.getContext("2d");
+			ctx.strokeStyle = '#000';
 			ctx.canvas.height = imageHeight;
 			ctx.canvas.width = imageWidth;
 			ctx.canvas.id = 'question_image';
