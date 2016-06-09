@@ -1,17 +1,14 @@
 <?php
-$postid = $_GET['postid'];
 $db_name = 'question2answer';
  
 $db = mysql_connect('localhost:3306', 'user', 'user');
 
 mysql_select_db($db_name,$db);
  
-$sql = "SELECT * FROM qa_annotations WHERE postid={$postid} AND isEllipse=1";
+$sql = "SELECT MAX(`postid`) AS max_postid FROM `qa_posts`";
 $req = mysql_query($sql);
-$data = [];
-while ($row = mysql_fetch_assoc($req)) {
-	array_push($data,$row);
-}
+$data = mysql_fetch_assoc($req);
+
 
 echo json_encode($data);
 
