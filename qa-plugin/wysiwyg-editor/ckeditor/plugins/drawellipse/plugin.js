@@ -47,6 +47,7 @@ CKEDITOR.plugins.add('drawellipse', {
 
 				updateAnnotation(x1,y1,x2,y2,postid);
 				drawExistingEllipse();
+				drawExistingLasso();
 			}
 
 			canvas.$.onmousemove = function(e) {
@@ -128,7 +129,6 @@ function drawExistingEllipse(){
 		alert( "error" );
 	});
 
-	drawExistingLasso();
 	
 }
 

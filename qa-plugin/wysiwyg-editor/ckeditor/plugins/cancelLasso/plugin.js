@@ -22,6 +22,8 @@ CKEDITOR.plugins.add('cancellasso', {
 			ctx.drawImage(base_image, 0, 0, imageWidth, imageHeight);
 
 			drawExistingLasso();
+			drawExistingEllipse();
+			
 		}
 		});
 	}

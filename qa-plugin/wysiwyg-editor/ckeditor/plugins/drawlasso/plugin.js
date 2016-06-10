@@ -27,7 +27,6 @@ CKEDITOR.plugins.add('drawlasso', {
 			window.onscroll=function(e){ reOffset(); }
 
 			ctx.lineWidth=2;
-			ctx.strokeStyle='blue';
 
 
 			canvas.$.onmousedown = function(e){
@@ -80,6 +79,7 @@ function drawLasso(){
 		ctx.stroke();
 		updateAnnotationLasso();
 		drawExistingLasso();
+		drawExistingEllipse();
 	}	
 };
 
@@ -144,7 +144,7 @@ function drawExistingLasso(){
 		alert( "error" );
 	});
 	
-	drawExistingEllipse();
+
 
 }
 
