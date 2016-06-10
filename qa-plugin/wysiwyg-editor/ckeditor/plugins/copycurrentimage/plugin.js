@@ -56,10 +56,6 @@ CKEDITOR.plugins.add('copycurrentimage', {
 
 			current_canvas_insered = true;
 			
-//			var img = document.getElementsByTagName("img");
-//			element.remove(img);
-//			console.log(element);
-//			
 		}
 
 		

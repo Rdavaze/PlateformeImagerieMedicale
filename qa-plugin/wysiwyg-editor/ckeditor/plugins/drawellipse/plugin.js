@@ -24,7 +24,7 @@ CKEDITOR.plugins.add('drawellipse', {
 				canvas = current_canvas;
 				base_image = current_base_image;
 			}
-			var	    w = canvas.width,
+			var w = canvas.width,
 			h = canvas.height,
 			x1,
 			x2,
