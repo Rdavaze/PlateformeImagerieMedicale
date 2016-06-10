@@ -52,7 +52,7 @@ CKEDITOR.plugins.add('strinsert',
 				case 'Rouge': ctx.strokeStyle = '#F00';break;
 				case 'Jaune': ctx.strokeStyle = '#FF0';break;
 				case 'Vert': ctx.strokeStyle = '#0F0';break;
-				default: ctx.strokeStyle = '#000'; 
+				default: ctx.strokeStyle = '#00F'; 
 				}
 								
 								

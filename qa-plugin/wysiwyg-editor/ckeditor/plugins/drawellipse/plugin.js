@@ -15,7 +15,15 @@ CKEDITOR.plugins.add('drawellipse', {
 		editor.addCommand('drawellipseCommand',{ exec: function( editor ) {
 
 			getPostID();
-
+			if(current_canvas !== undefined){
+				imageLink = current_imageLink;
+				imageHeight = current_imageHeight;
+				imageWidth = current_imageWidth;
+				canvas_insered = current_canvas_insered;
+				ctx = current_ctx;
+				canvas = current_canvas;
+				base_image = current_base_image;
+			}
 			var	    w = canvas.width,
 			h = canvas.height,
 			x1,
@@ -23,7 +31,7 @@ CKEDITOR.plugins.add('drawellipse', {
 			y1,
 			y2,
 			isDown = false;     
-
+			ctx.strokeStyle = '#00F';
 
 			canvas.$.onmousedown = function(e) {
 
@@ -120,6 +128,8 @@ function drawExistingEllipse(){
 		alert( "error" );
 	});
 
+	drawExistingLasso();
+	
 }
 
 function getPostID(){

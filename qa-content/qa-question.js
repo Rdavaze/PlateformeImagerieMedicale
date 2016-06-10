@@ -73,9 +73,7 @@ function qa_toggle_element(elem)
 function qa_submit_answer(questionid, elem)
 {
 	var params=qa_form_params('a_form');
-	console.log(elem);
 	params.a_questionid=questionid;
-
 	qa_ajax_post('answer', params,
 		function(lines) {
 

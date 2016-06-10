@@ -6,7 +6,28 @@ var imageLink,
 	canvas_insered = false,
 	ctx,
 	canvas,
-	base_image;
+	base_image,
+	current_editor,
+	element;
+
+//$(".qa-form-tall-button.qa-form-tall-button-answer").click(function(){
+////	if(canvas !== undefined){
+////		alert('toto');
+//		var dataURL = canvas.$.toDataURL("image/png");
+//	//	dataURL = dataURL.replace(/^data:image\/(png|jpg);base64,/, "")
+//		console.log(dataURL);
+//		//alert(dataURL);
+//		var image = new Image();
+//		image.src = dataURL;
+//		//document.body.appendChild(image);
+//		current_editor.insertHtml("<img src="+dataURL+" width="+imageWidth+" height="+imageHeight);
+//		current_editor.updateElement();
+////	}
+//		
+//		
+//});
+
+
 
 CKEDITOR.plugins.add('copyimage', {
 	icons : 'copyimage',
@@ -15,14 +36,14 @@ CKEDITOR.plugins.add('copyimage', {
 
 	// ajout du bouton dans la toolbar
 	editor.ui.addButton('copyimage', {
-		label   : 'Copie image',
+		label   : 'Copie image question',
 		command : 'copyimageCommand',
 		toolbar : 'copyimage'
 	});
 
 	// bind de la commande au bouton
 	editor.addCommand('copyimageCommand',{ exec: function( editor ) {
-		
+		current_editor = editor;
 		if(editor.getData().search("canvas") == -1){
 			canvas_insered = false;
 		}
@@ -33,15 +54,15 @@ CKEDITOR.plugins.add('copyimage', {
 
 		if(imageLink !== undefined && canvas_insered == false){
 
-
+//		canvas = document.createElement('canvas');
 			canvas = new CKEDITOR.dom.element("canvas");
 			canvas.width = imageWidth;
 			canvas.height = imageHeight;
 			canvas.id = 'question_image';
-
-			var element = editor.getSelection().getStartElement().getParent();
+			element = editor.getSelection().getStartElement().getParent();
 			element.append(canvas);
 			
+//			ctx = canvas.getContext("2d");
 			ctx = canvas.$.getContext("2d");
 			ctx.strokeStyle = '#000';
 			ctx.canvas.height = imageHeight;
@@ -54,19 +75,39 @@ CKEDITOR.plugins.add('copyimage', {
 				ctx.drawImage(base_image, 0, 0, imageWidth, imageHeight);
 					}
 			base_image.src = imageLink;
-
-			//qa_submit_answer(1, editor.getData());
+			
 			canvas_insered = true;
 
+		    
+		    var dataURL = canvas.$.toDataURL("image/png");
+			
+			$.ajax({
+				url: 'qa-plugin/wysiwyg-editor/ckeditor/plugins/copyimage/saveImage.php',
+				type: 'POST',
+				dataType: 'text',
+				data: {'data':dataURL}
+			});
+		    
+
+//			var dataURL = canvas.$.toDataURL("image/png");
+//			dataURL = dataURL.replace(/^data:image\/(png|jpg);base64,/, "")
+////				//console.log(dataURL);
+////				//alert(dataURL);
+//				var image = new Image();
+//				image.src = dataURL;
+//				$.post()
+////				//document.body.appendChild(image);
+//				editor.insertHtml("<img src="+dataURL+" width="+imageWidth+" height="+imageHeight+"/>");
+////				//editor.updateElement();
+////		
+//			var blob = b64toBlob(dataURL,'image/png',512);
+//			var blobUrl = URL.createObjectURL(blob);
+//			console.log(blobUrl);
+//			//window.location = blobUrl;
 			
 		}
 
 		
-		
-		//$(".qa-form-tall-button.qa-form-tall-button-answer").on('click',qa_submit_answer(2, editor.getData()));
-//		
-//		$(".qa-form-tall-button.qa-form-tall-button-save").on('click',saveContent(editor.getData()));
-//		
 		
 	}}
 			);
@@ -119,15 +160,14 @@ function getImageLink(title){
 
 }
 
-function saveContent(data){
-	
-	// TODO : Trouver un moyen de catch le post_id pour update le content + affichage html
-	var post_id;
-	$.ajax({
-		url: 'qa-plugin/wysiwyg-editor/ckeditor/plugins/copyimage/saveContent.php',
-		type: 'POST',
-		dataType: 'text',
-		data: 'data=' + data + '&post_id=2'
-	});
-}
-
+//function saveContent(data){
+//	
+//	// TODO : Trouver un moyen de catch le post_id pour update le content + affichage html
+//	var post_id;
+//	$.ajax({
+//		url: 'qa-plugin/wysiwyg-editor/ckeditor/plugins/copyimage/saveContent.php',
+//		type: 'POST',
+//		dataType: 'text',
+//		data: 'data=' + data + '&post_id=2'
+//	});
+//}

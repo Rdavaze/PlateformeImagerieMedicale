@@ -1,5 +1,4 @@
 
-//Plugin permettant de dessiner une ellipse dans un canvas
 CKEDITOR.plugins.add('cancelellipse', {
 	icons : 'cancelellipse',
 	init  : function (editor) {
@@ -19,6 +18,10 @@ CKEDITOR.plugins.add('cancelellipse', {
 			}
 
 			removeLastEllipseAnnotation();
+			ctx.clearRect(0, 0, imageWidth, imageHeight);
+			ctx.drawImage(base_image, 0, 0, imageWidth, imageHeight);
+
+			drawExistingEllipse();
 		}
 		});
 	}
